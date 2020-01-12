@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Login flow app</string>
+
+    <string name="logout">Logout</string>
+    <string name="login">Login</string>
+    <string name="welcome_info_default">Welcome My Friend</string>
+    <string name="welcome_info_logged_in">Welcome</string>
+    <string name="login_hint">login</string>
+    <string name="email_hint">intive@intive.pl</string>
+    <string name="password_hint">6chars@</string>
+    <string name="header_login">Enter your account data</string>
+    <string name="invalid_login">Login should contain at least 5 small letters without any other characters.\n</string>
+    <string name="invalid_password"> Password should contain min 6 characters with at least one number and one special character.\n</string>
+    <string name="invalid_email">Email format is not correct.\n</string>
+    <string name="toast_logout">Logged out!</string>
+    <string name="login_name">Login :</string>
+    <string name="emial_name">Emial :</string>
+    <string name="password_name">Password :</string>
+
 </resources>

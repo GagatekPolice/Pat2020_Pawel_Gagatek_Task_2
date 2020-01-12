@@ -5,5 +5,5 @@
 
 ## Built With
 * **SQLite** -  *library that implements a small, fast, self-contained, SQL database engine*
-* **Fragnment** - *represents a behavior or a portion of user interface*
+* **Fragments** - *represents a behavior or a portion of user interface*
 

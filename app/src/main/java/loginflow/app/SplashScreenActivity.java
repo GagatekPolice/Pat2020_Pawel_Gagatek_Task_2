@@ -16,7 +16,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private long displayTimeStart;
     private long displayTime=6000;
-    private Handler countDownTimer = new Handler();
+    private final Handler countDownTimer = new Handler();
     private Runnable nextActivityRunner;
     private boolean isSplashFinished=false;
 
@@ -78,7 +78,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             Cursor userData = databaseHelper.getUserData();
             userData.moveToFirst();
-            String displayText=this.getResources().getString(R.string.welcome_info_logged_in)+" "+userData.getString(userData.getColumnIndex(DatabaseHelper.COLUMN_EMAIL));
+            String displayText=this.getResources().getString(R.string.welcome_info_logged_in)+" "+databaseHelper.getEmail();
             bntHeaderText.setText(displayText);
 
         }

@@ -12,111 +12,119 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="15sp"
+        android:textSize="20sp"
+        android:layout_marginTop="0dp"
         android:textAlignment="center"
         android:text="@string/header_login"
-        />
+        android:textColor="@color/colorDarkBlue"/>
 
     <TextView
         android:id="@+id/login_fragment_tv_validity_status"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_red_light" />
+        android:textColor="@android:color/holo_red_light"
+        android:textAlignment="center" />
 
-
-        <LinearLayout android:layout_width="fill_parent"
+    <RelativeLayout
+        android:layout_marginTop="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <EditText
+            android:id="@+id/login_fragment_et_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_edittext"
+            android:paddingStart="45dp"
+            android:paddingEnd="0dp"
+            android:hint="@string/login_hint"
+            android:inputType="textEmailAddress"
+            android:importantForAutofill="no" />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:weightSum="3"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/login_name" />
-
-                <EditText
-                    android:id="@+id/login_fragment_et_login"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/login_hint"
-                    android:textAlignment="center"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/emial_name" />
-
-                <EditText
-                    android:id="@+id/login_fragment_et_email"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/email_hint"
-                    android:textAlignment="center"/>
-
-            </LinearLayout>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:background="#ffffff"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:text="@string/login"
+            android:textStyle="bold"/>
+    </RelativeLayout>
 
 
-        </LinearLayout>
-        <LinearLayout android:layout_width="fill_parent"
+    <RelativeLayout
+        android:layout_marginTop="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <EditText
+            android:id="@+id/login_fragment_et_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_edittext"
+            android:paddingStart="45dp"
+            android:paddingEnd="0dp"
+            android:hint="@string/email_hint"
+            android:inputType="textEmailAddress"
+            android:importantForAutofill="no" />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:weightSum="3"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:background="#ffffff"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:text="@string/email"
+            android:textStyle="bold"/>
+    </RelativeLayout>
 
-            <LinearLayout
-                android:layout_weight="2"
-                android:weightSum="100"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="30"
-                    android:text="@string/password_name" />
 
-                <EditText
-                    android:id="@+id/login_fragment_et_password"
-                    android:inputType="textPassword"
-                    android:layout_weight="70"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password_hint"
-                    android:textAlignment="center" />
+    <RelativeLayout
+        android:layout_marginTop="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <EditText
+            android:id="@+id/login_fragment_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_edittext"
+            android:paddingStart="45dp"
+            android:paddingEnd="0dp"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:importantForAutofill="no" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:background="#ffffff"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:text="@string/password"
+            android:textStyle="bold"/>
+    </RelativeLayout>
 
-            </LinearLayout>
 
-    </LinearLayout>
 
     <Button
         android:id="@+id/login_fragment_btn_login"
         android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="5dp"
         android:textAlignment="center"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:text="@string/login"/>
 
 

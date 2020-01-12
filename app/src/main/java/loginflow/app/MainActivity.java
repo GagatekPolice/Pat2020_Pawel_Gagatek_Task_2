@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FragmentTransaction fragmentTransaction;
 
-    private static final String LOGIN_FRAGMENT="newsitem_fragment";
+    private static final String LOGIN_FRAGMENT="login_fragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(databaseHelper.isUserIsLoggedIn()){
             btnLogin.setText(this.getResources().getString(R.string.logout));
-            Log.e("test"," user logged in "+databaseHelper.numberOfRows());
         }
         else{
             btnLogin.setVisibility(View.INVISIBLE);
@@ -60,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
 
         if (view.getId() == R.id.main_activity_btn_login) {
+            Cursor userData = databaseHelper.getUserData();
+            userData.moveToFirst();
+
             if(databaseHelper.isUserIsLoggedIn()){
                 btnLogin.setText(this.getResources().getString(R.string.login));
                 databaseHelper.changeUserSession(0);
@@ -79,6 +81,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(LOGIN_FRAGMENT);
         if(fragment != null){
             btnLogin.setVisibility(View.VISIBLE);
+            if(databaseHelper.isUserIsLoggedIn()){
+                btnLogin.setText(this.getResources().getString(R.string.logout));
+            }
+            else{
+                btnLogin.setText(this.getResources().getString(R.string.login));
+            }
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }
         else{
@@ -106,11 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if(savedInstanceState!=null){
-            Log.i("test"," login "+savedInstanceState.getString("typedLogin"));
-            Log.i("test"," emial "+savedInstanceState.getString("typedEmail"));
-            Log.i("test"," passwd "+savedInstanceState.getString("typedPassword"));
-            Log.i("test"," info "+savedInstanceState.getString("validityInfo"));
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(LOGIN_FRAGMENT);
+        if(savedInstanceState!=null && fragment != null){
 
             EditText etTypedLogin = findViewById(R.id.login_fragment_et_login);
             EditText etTypedEmail = findViewById(R.id.login_fragment_et_email);

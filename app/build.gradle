@@ -25,5 +25,4 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     androidTestImplementation 'androidx.fragment_login.ext:junit:1.1.0'
     androidTestImplementation 'androidx.fragment_login.espresso:espresso-core:3.1.1'
-    implementation 'org.jetbrains:annotations-java5:15.0'
 }

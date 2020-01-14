@@ -15,11 +15,23 @@ import loginflow.app.database.DatabaseHelper;
 public class SplashScreenActivity extends AppCompatActivity {
 
     private long displayTimeStart;
-    private long displayTime=6000;
+    private long displayTime = 6000;
     private final Handler countDownTimer = new Handler();
-    private Runnable nextActivityRunner;
-    private boolean isSplashFinished=false;
+    private final Runnable nextActivityRunner;
+    private boolean isSplashFinished = false;
+    private final static String TIME_LEFT_KEY = "timeLeft";
 
+    public SplashScreenActivity() {
+        nextActivityRunner = new Runnable() {
+            @Override
+            public void run() {
+                isSplashFinished = true;
+                Intent homeScreenIntent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                SplashScreenActivity.this.startActivity(homeScreenIntent);
+                SplashScreenActivity.this.finish();
+            }
+        };
+    }
 
 
     @Override
@@ -29,38 +41,27 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 
-        if(isSplashFinished){
+        if (isSplashFinished) {
             Intent homeScreenIntent = new Intent(SplashScreenActivity.this, MainActivity.class);
             SplashScreenActivity.this.startActivity(homeScreenIntent);
             SplashScreenActivity.this.finish();
         }
-        if(savedInstanceState!=null){
-            displayTime=savedInstanceState.getLong("timeLeft");
+        if (savedInstanceState != null) {
+            displayTime = savedInstanceState.getLong(TIME_LEFT_KEY);
         }
-
 
         displayWelcomeText();
 
 
-        nextActivityRunner = new Runnable(){
-            @Override
-            public void run() {
-                isSplashFinished=true;
-                Intent homeScreenIntent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                SplashScreenActivity.this.startActivity(homeScreenIntent);
-                SplashScreenActivity.this.finish();
-            }
-        };
-
         displayTimeStart = System.currentTimeMillis();
-        countDownTimer.postDelayed( nextActivityRunner, displayTime);
+        countDownTimer.postDelayed(nextActivityRunner, displayTime);
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        long elapsedTime = System.currentTimeMillis()-displayTimeStart;
-        outState.putLong("timeLeft",displayTime-elapsedTime);
+        long elapsedTime = System.currentTimeMillis() - displayTimeStart;
+        outState.putLong(TIME_LEFT_KEY, displayTime - elapsedTime);
     }
 
     @Override
@@ -69,20 +70,19 @@ public class SplashScreenActivity extends AppCompatActivity {
         countDownTimer.removeCallbacks(nextActivityRunner);
     }
 
-    private void displayWelcomeText(){
-        DatabaseHelper databaseHelper=new DatabaseHelper(this);
+    private void displayWelcomeText() {
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
 
         TextView bntHeaderText = this.findViewById(R.id.splash_screen_activity_txtView_welcome_header);
 
-        if(databaseHelper.isUserIsLoggedIn()){
+        if (databaseHelper.isUserIsLoggedIn()) {
 
             Cursor userData = databaseHelper.getUserData();
             userData.moveToFirst();
-            String displayText=this.getResources().getString(R.string.welcome_info_logged_in)+" "+databaseHelper.getEmail();
+            String displayText = this.getResources().getString(R.string.welcome_info_logged_in, databaseHelper.getEmail());
             bntHeaderText.setText(displayText);
 
-        }
-        else{
+        } else {
 
             bntHeaderText.setText(this.getResources().getString(R.string.welcome_info_default));
 

@@ -3,18 +3,15 @@
 
     <string name="logout">Logout</string>
     <string name="welcome_info_default">Welcome My Friend</string>
-    <string name="welcome_info_logged_in">Welcome</string>
+    <string name="welcome_info_logged_in">Welcome %1$s</string>
     <string name="login_hint">Type your login</string>
     <string name="email_hint">Type your email address </string>
     <string name="password_hint">Type your password</string>
     <string name="header_login">Enter your account data</string>
     <string name="invalid_login">Login should contain at least 5 small letters without any other characters.\n</string>
     <string name="invalid_password"> Password should contain min 6 characters with at least one number and one special character.\n</string>
-    <string name="invalid_email">Email format is not correct.\n</string>
+    <string name="invalid_email">Email format is not correct.</string>
     <string name="toast_logout">Logged out!</string>
-    <string name="login_name">Login :</string>
-    <string name="emial_name">Emial :</string>
-    <string name="password_name">Password :</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="login">Login</string>

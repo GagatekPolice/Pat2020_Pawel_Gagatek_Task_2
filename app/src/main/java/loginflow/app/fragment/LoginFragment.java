@@ -34,8 +34,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_login, container, false);
@@ -60,44 +58,42 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view.getId() == R.id.login_fragment_btn_login) {
             tvValidityInfo.setText("");
-            DatabaseHelper databaseHelper=new DatabaseHelper(getContext());
+            DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
 
             String login = String.valueOf(etTypedLogin.getText());
             String email = String.valueOf(etTypedEmail.getText());
             String password = String.valueOf(etTypedPassword.getText());
 
             /*
-            * Email format due to RFC-5322
-            */
-            boolean isLoginValid =isDataValid(login,"[a-z]{5,}",R.string.invalid_login);
-            boolean isEmailValid =isDataValid(email,"^^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,12}$",R.string.invalid_email);
-            boolean isPasswordValid  =isDataValid(password,"(?=.*?\\d)(?=.*?[a-zA-Z])(?=.*?[^\\w]).{6,32}",R.string.invalid_password);
+             * Email format due to RFC-5322
+             */
+            boolean isLoginValid = isDataValid(login, "[a-z]{5,}", R.string.invalid_login);
+            boolean isEmailValid = isDataValid(email, "^^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,12}$", R.string.invalid_email);
+            boolean isPasswordValid = isDataValid(password, "(?=.*?\\d)(?=.*?[a-zA-Z])(?=.*?[^\\w]).{6,32}", R.string.invalid_password);
 
-            if(isLoginValid && isEmailValid && isPasswordValid){
-     
-            if(databaseHelper.isEmpty()){
-                databaseHelper.insertUser(login,email,password,1);
-            }
-            else{
-                databaseHelper.updateUser(login,email,password,1);
-            }
+            if (isLoginValid && isEmailValid && isPasswordValid) {
+
+                if (databaseHelper.isEmpty()) {
+                    databaseHelper.insertUser(login, email, password, 1);
+                } else {
+                    databaseHelper.updateUser(login, email, password, 1);
+                }
                 btnLoginMainActivity.setText(Objects.requireNonNull(getContext()).getString(R.string.logout));
                 btnLoginMainActivity.setVisibility(View.VISIBLE);
-            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().remove(this).commit();
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().remove(this).commit();
             }
         }
     }
 
 
-
-    private boolean isDataValid(String data, String pattern, int resource){
-        if(data.matches(String.valueOf(pattern))){
+    private boolean isDataValid(String data, String pattern, int resource) {
+        if (data.matches(String.valueOf(pattern))) {
             return true;
         }
-        String validityInfo=tvValidityInfo.getText()+ Objects.requireNonNull(getContext()).getString(resource);
+        String validityInfo = tvValidityInfo.getText() + Objects.requireNonNull(getContext()).getString(resource);
         tvValidityInfo.setText(validityInfo);
 
-    return false;
+        return false;
     }
 
 }

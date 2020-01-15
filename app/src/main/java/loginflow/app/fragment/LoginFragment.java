@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 import loginflow.app.R;
@@ -22,6 +24,15 @@ import loginflow.app.database.DatabaseHelper;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
+
+    private final static String LOGIN_PATTERN = "[a-z]+";
+    private final static String PASSWORD_PATTERN = "(?=.*?\\d)(?=.*?[a-zA-Z])(?=.*?[^\\w]).{6,32}";
+    private final static String EMAIL_PATTERN = "^^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,15}$";
+
+    private final static Pattern loginPattern = Pattern.compile(LOGIN_PATTERN);
+    private final static Pattern passwordPattern = Pattern.compile(PASSWORD_PATTERN);
+    private final static Pattern emialPattern = Pattern.compile(EMAIL_PATTERN);
+
 
     private EditText etTypedLogin;
     private EditText etTypedEmail;
@@ -60,16 +71,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             tvValidityInfo.setText("");
             DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
 
-            String login = String.valueOf(etTypedLogin.getText());
-            String email = String.valueOf(etTypedEmail.getText());
-            String password = String.valueOf(etTypedPassword.getText());
+            final String login = String.valueOf(etTypedLogin.getText());
+            final String email = String.valueOf(etTypedEmail.getText());
+            final String password = String.valueOf(etTypedPassword.getText());
 
             /*
              * Email format due to RFC-5322
              */
-            boolean isLoginValid = isDataValid(login, "[a-z]{5,}", R.string.invalid_login);
-            boolean isEmailValid = isDataValid(email, "^^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,12}$", R.string.invalid_email);
-            boolean isPasswordValid = isDataValid(password, "(?=.*?\\d)(?=.*?[a-zA-Z])(?=.*?[^\\w]).{6,32}", R.string.invalid_password);
+            final boolean isLoginValid = isDataValid(login, loginPattern, R.string.invalid_login);
+            final boolean isEmailValid = isDataValid(email, emialPattern, R.string.invalid_email);
+            final boolean isPasswordValid = isDataValid(password, passwordPattern, R.string.invalid_password);
 
             if (isLoginValid && isEmailValid && isPasswordValid) {
 
@@ -86,8 +97,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    private boolean isDataValid(String data, String pattern, int resource) {
-        if (data.matches(String.valueOf(pattern))) {
+    private boolean isDataValid(String data, Pattern pattern, int resource) {
+        Matcher matcher = pattern.matcher(data);
+        if (matcher.matches()) {
             return true;
         }
         String validityInfo = tvValidityInfo.getText() + Objects.requireNonNull(getContext()).getString(resource);

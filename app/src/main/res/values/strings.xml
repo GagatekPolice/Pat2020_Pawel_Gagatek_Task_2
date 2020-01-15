@@ -8,7 +8,7 @@
     <string name="email_hint">Type your email address </string>
     <string name="password_hint">Type your password</string>
     <string name="header_login">Enter your account data</string>
-    <string name="invalid_login">Login should contain at least 5 small letters without any other characters.\n</string>
+    <string name="invalid_login">Login should contain at least one small letters without any other characters.\n</string>
     <string name="invalid_password"> Password should contain min 6 characters with at least one number and one special character.\n</string>
     <string name="invalid_email">Email format is not correct.</string>
     <string name="toast_logout">Logged out!</string>

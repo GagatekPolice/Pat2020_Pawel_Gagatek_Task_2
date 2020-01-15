@@ -118,10 +118,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRestoreInstanceState(savedInstanceState);
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(LOGIN_FRAGMENT);
         if (savedInstanceState != null && fragment != null) {
-            EditText etTypedLogin = findViewById(R.id.login_fragment_et_login);
-            EditText etTypedEmail = findViewById(R.id.login_fragment_et_email);
-            EditText etTypedPassword = findViewById(R.id.login_fragment_et_password);
-            TextView tvValidityInfo = findViewById(R.id.login_fragment_tv_validity_status);
+            final EditText etTypedLogin = findViewById(R.id.login_fragment_et_login);
+            final EditText etTypedEmail = findViewById(R.id.login_fragment_et_email);
+            final EditText etTypedPassword = findViewById(R.id.login_fragment_et_password);
+            final TextView tvValidityInfo = findViewById(R.id.login_fragment_tv_validity_status);
 
             etTypedLogin.setText(savedInstanceState.getString(TYPED_LOGIN_KEY));
             etTypedEmail.setText(savedInstanceState.getString(TYPED_EMAIL_KEY));

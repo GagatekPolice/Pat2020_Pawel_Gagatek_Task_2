@@ -14,12 +14,14 @@ import loginflow.app.database.DatabaseHelper;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    private final static String TIME_LEFT_KEY = "timeLeft";
+    private final static int DISPLAY_TIME = 6000;
+
     private long displayTimeStart;
-    private long displayTime = 6000;
+    private long displayTime = DISPLAY_TIME;
     private final Handler countDownTimer = new Handler();
     private final Runnable nextActivityRunner;
     private boolean isSplashFinished = false;
-    private final static String TIME_LEFT_KEY = "timeLeft";
 
     public SplashScreenActivity() {
         nextActivityRunner = new Runnable() {
@@ -92,8 +94,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Intent homeScreenIntent = new Intent(SplashScreenActivity.this, MainActivity.class);
-        SplashScreenActivity.this.startActivity(homeScreenIntent);
-        SplashScreenActivity.this.finish();
+        Intent homeScreenIntent = new Intent(this, MainActivity.class);
+        this.startActivity(homeScreenIntent);
+        this.finish();
     }
 }

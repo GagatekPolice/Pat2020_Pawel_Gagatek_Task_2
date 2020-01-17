@@ -27,11 +27,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private final static String LOGIN_PATTERN = "[a-z]+";
     private final static String PASSWORD_PATTERN = "(?=.*?\\d)(?=.*?[a-zA-Z])(?=.*?[^\\w]).{6,32}";
-    private final static String EMAIL_PATTERN = "^^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,15}$";
+    private final static String ELECTRONIC_MAIL_PATTERN = "^^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,15}$";
 
     private final static Pattern loginPattern = Pattern.compile(LOGIN_PATTERN);
     private final static Pattern passwordPattern = Pattern.compile(PASSWORD_PATTERN);
-    private final static Pattern emialPattern = Pattern.compile(EMAIL_PATTERN);
+    private final static Pattern electronicMailPattern = Pattern.compile(ELECTRONIC_MAIL_PATTERN);
 
 
     private EditText etTypedLogin;
@@ -79,7 +79,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
              * Email format due to RFC-5322
              */
             final boolean isLoginValid = isDataValid(login, loginPattern, R.string.invalid_login);
-            final boolean isEmailValid = isDataValid(email, emialPattern, R.string.invalid_email);
+            final boolean isEmailValid = isDataValid(email, electronicMailPattern, R.string.invalid_email);
             final boolean isPasswordValid = isDataValid(password, passwordPattern, R.string.invalid_password);
 
             if (isLoginValid && isEmailValid && isPasswordValid) {

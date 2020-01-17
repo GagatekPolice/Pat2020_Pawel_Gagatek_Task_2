@@ -98,4 +98,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         this.startActivity(homeScreenIntent);
         this.finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        countDownTimer.removeCallbacks(nextActivityRunner);
+    }
 }
